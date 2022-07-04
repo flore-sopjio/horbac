@@ -1,0 +1,22 @@
+:host {
+  .legend {
+    small {
+      font-size: x-small;
+    }
+  }
+}
+
+.form {
+  margin: auto;
+  width: 50%;
+}
+
+.sub {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+
+.btn-sub {
+  margin-top: 10px !important;
+}

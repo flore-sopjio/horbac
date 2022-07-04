@@ -1,0 +1,50 @@
+<div class="form">
+  <form [formGroup]="form" class="was-validated">
+    <div>
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="subjectId">Nom de l'employé:</label>
+        <input formControlName="nom" type="text" class="form-control" id="nom" placeholder="username" required>
+        <div class="invalid-feedback">
+          Veuillez saisir votre nom !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="organisationalUnit">Sélectionner votre unité organisationnelle:</label>
+        <select name="organisationalUnit" id="organisationalUnit" class="form-control"
+          formControlName="organisationalUnit">
+          <option *ngFor="let unity of listUnities" [ngValue]="unity"> {{ unity }} </option>
+        </select>
+        <div class="invalid-feedback">
+          Veuillez saisir votre Unité organisationnelle !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="superieurH">Sélectionner votre supérieur hiérarchique:</label>
+        <select name="superieurH" id="superieurH" class="form-control" formControlName="superieurH">
+          <option *ngFor="let supervisor of listSupervisor" [ngValue]="supervisor">{{supervisor?.nom}}
+            ({{supervisor?.organisationalUnit}})
+          </option>
+        </select>
+      </div>
+      <div class="sub">
+        <button [disabled]="form.invalid" class="btn btn-primary btn-sm btn-sub"
+          (click)="createSupervisor()">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<c-modal id="liveDemoModal1" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Notification</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body> {{ response }} </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Close
+    </button>
+  </c-modal-footer>
+</c-modal>

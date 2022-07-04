@@ -1,0 +1,20 @@
+/*  namespace test {
+
+    import oasis.Attributes.*
+
+    
+    policy validAccess {
+          
+        apply permitOverrides  
+         
+        //target clause test.View == "book" 
+                 
+        rule { 
+            target clause test.subjectId == "bob" and test.view == "book" and test.resourceId == "madame bauvary"  and test.actionId == "read"    
+            permit
+            condition  test.organizationalUnit == "lecteur" && test.currentTime  < "08:00:00" : time
+        }
+    }
+}
+*/
+

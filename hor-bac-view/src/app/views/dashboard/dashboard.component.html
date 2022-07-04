@@ -1,0 +1,74 @@
+<div class="form">
+  <form [formGroup]="form" class="was-validated">
+    <div>
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="subjectId">Nom de l'utilisateur:</label>
+        <input formControlName="subjectId" type="text" class="form-control" id="subjectId" placeholder="username"
+          required>
+        <div class="invalid-feedback">
+          Veuillez saisir votre nom d'utilisateur !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="organizationalUnit">Unité organisationnelle:</label>
+        <input formControlName="organizationalUnit" type="text" class="form-control" id="organizationalUnit" placeholder="unité" required>
+        <div class="invalid-feedback">
+          Veuillez saisir votre Unité organisationnelle !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="resourceId">Vous souhaitez acceder à quelle ressource ?</label>
+        <input formControlName="resourceId" type="text" class="form-control" id="resourceId" placeholder="ressource"
+          required>
+        <div class="invalid-feedback">
+          Veuillez saisir le nom de la ressource !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="view">Catégorie:</label>
+        <input formControlName="view" type="text" class="form-control" id="view" placeholder="catégorie"
+          required>
+        <div class="invalid-feedback">
+          Veuillez saisir la catégorie !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="actionId">Quelle opération voulez-vous éffectuer ?</label>
+        <input formControlName="actionId" type="text" class="form-control" id="actionId" placeholder="opération"
+          required>
+        <div class="invalid-feedback">
+          Veuillez saisir l'opération !
+        </div>
+      </div>
+
+      <div class="form-group col-md-6 col-lg-12">
+        <label for="environmentId">Dans quel contexte ?</label>
+        <input formControlName="environmentId" type="text" class="form-control" id="environmentId" placeholder="contexte" required>
+        <div class="invalid-feedback">
+          Veuillez saisir le contexte!
+        </div>
+      </div>
+      <div class="sub">
+        <button [disabled]="form.invalid" class="btn btn-primary btn-sm btn-sub" (click)="sendRequest()">Envoyer</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Notification</h5>
+    <button (click)="toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body> {{ response }} </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleLiveDemo()" cButton color="secondary">
+      Close
+    </button>
+    <!--button cButton color="primary">Save changes</button-->
+  </c-modal-footer>
+</c-modal>
