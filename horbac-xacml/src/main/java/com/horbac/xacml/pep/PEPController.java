@@ -33,6 +33,7 @@ public class PEPController {
 	@PostMapping("/req")
 	public ResponseEntity<DecisionType> checkRequest(@RequestBody Request request) {
 		Request req = request;
+		
 		return new ResponseEntity<>(pdpService.evaluate(req), HttpStatus.OK) ;
 	}
 
