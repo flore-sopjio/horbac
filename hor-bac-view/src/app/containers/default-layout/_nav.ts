@@ -13,16 +13,15 @@ export const navItems: INavData[] = [
   },*/
   {
     name: 'Nouveau supérieur',
-    url: 'superior',
+    url: '/superior',
     iconComponent: { name: 'cil-user-follow' }
+  },
+  {
+    name: 'Traitement',
+    url: '/Traitement',
+    iconComponent: { name: 'cil-pencil' }
   }
   /*
-  {
-    name: 'Typography',
-    url: '/theme/typography',
-    linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-pencil' }
-  },
   {
     name: 'Components',
     title: true

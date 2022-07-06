@@ -5,4 +5,5 @@ export interface RequestDTO {
     view?: string;
     actionId?: string;
     environmentId?: string;
+    status?: string;
 }
