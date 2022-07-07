@@ -59,13 +59,23 @@ public class PEPController {
 
 
     /**
-     * Get the requests list
+     * Get the requests list with pagination
      * @return
      * @return
      */
     @GetMapping("/request")
-    public ResponseEntity<List<Request>> getRequests(@RequestParam Integer page, @RequestParam Integer size){
-        return new ResponseEntity<List<Request>>(requestService.getRequests(page, size), HttpStatus.OK);
+    public ResponseEntity<List<Request>> getRequestsPaginated(@RequestParam Integer page, @RequestParam Integer size){
+        return new ResponseEntity<List<Request>>(requestService.getRequestsPagenate(page, size), HttpStatus.OK);
+    }
+
+    /**
+     * Get the requests list without pagination
+     * @return
+     * @return
+     */
+    @GetMapping("/request/all")
+    public ResponseEntity<List<Request>> getRequests(){
+        return new ResponseEntity<List<Request>>(requestService.getRequests(), HttpStatus.OK);
     }
 
     /**
