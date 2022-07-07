@@ -10,10 +10,16 @@ import java.util.List;
 public interface RequestService {
 
     /**
-     * get the requests list
+     * get the requests list with pagination
      * @return
      */
-    List<Request> getRequests(int pageNumber, int pageSize);
+    List<Request> getRequestsPagenate(int pageNumber, int pageSize);
+
+    /**
+     * get the requests list without pagination
+     * @return
+     */
+    List<Request> getRequests();
 
     /**
      * Save request to database.
