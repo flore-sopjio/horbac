@@ -28,104 +28,121 @@ import oasis.names.tc.xacml._3_0.core.schema.wd_17.DecisionType;
 
 @RestController
 public class PEPController {
-	@Autowired
-	protected PDPEngineService pdpService;
     @Autowired
-	protected RequestService requestService;
+    protected PDPEngineService pdpService;
+    @Autowired
+    protected RequestService requestService;
 
-	/* 
-	@GetMapping("/")
-	public DecisionType checkRequest(@RequestParam String subjectId, @RequestParam String resourceId,
-			@RequestParam String actionId) {
-		Request req = new Request(subjectId, resourceId, actionId);
-		return pdpService.evaluate(req);
-	}
-	*/
+    /*
+     * @GetMapping("/")
+     * public DecisionType checkRequest(@RequestParam String
+     * subjectId, @RequestParam String resourceId,
+     * 
+     * @RequestParam String actionId) {
+     * Request req = new Request(subjectId, resourceId, actionId);
+     * return pdpService.evaluate(req);
+     * }
+     */
 
-	@PostMapping("/request/req")
-	public ResponseEntity<DecisionType> checkRequest(@RequestBody Request request) {
-		Request req = request;
-		
-		return new ResponseEntity<>(pdpService.evaluate(req), HttpStatus.OK) ;
-	}
-
-	/**
-	 * 
-	 *================================================================================
-	 *        					Methodes sur les requests
-	 *================================================================================
-	 * 
-	 */
-
+    @PostMapping("/request/req")
+    public ResponseEntity<DecisionType> checkRequest(@RequestBody Request request) {
+        Request req = request;
+        DecisionType decisionType = pdpService.evaluate(req);
+        requestService.saveRequest(request);
+        return new ResponseEntity<>(decisionType, HttpStatus.OK);
+    }
 
     /**
-     * Get the requests list
+     * 
+     * ================================================================================
+     * Methodes sur les requests
+     * ================================================================================
+     * 
+     */
+
+    /**
+     * Get the requests list with pagination
+     * 
      * @return
      * @return
      */
     @GetMapping("/request")
-    public ResponseEntity<List<Request>> getRequests(@RequestParam Integer page, @RequestParam Integer size){
-        return new ResponseEntity<List<Request>>(requestService.getRequests(page, size), HttpStatus.OK);
+    public ResponseEntity<List<Request>> getRequestsPaginated(@RequestParam Integer page, @RequestParam Integer size) {
+        return new ResponseEntity<List<Request>>(requestService.getRequestsPagenate(page, size), HttpStatus.OK);
+    }
+
+    /**
+     * Get the requests list without pagination
+     * 
+     * @return
+     * @return
+     */
+    @GetMapping("/request/all")
+    public ResponseEntity<List<Request>> getRequests() {
+        return new ResponseEntity<List<Request>>(requestService.getRequests(), HttpStatus.OK);
     }
 
     /**
      * Get single request
+     * 
      * @return
      */
     @GetMapping("/request/{id}")
-    public ResponseEntity<Request> getRequest(@PathVariable Long id){
+    public ResponseEntity<Request> getRequest(@PathVariable Long id) {
 
         return new ResponseEntity<Request>(requestService.getSingleRequest(id), HttpStatus.OK);
     }
 
-    /**
-     * create an request
-     * @param request
-     * @return
-     */
+    /*
+      create an request
+     
+      @param request
+      @return
+     
     @PostMapping("/request")
-    public ResponseEntity<Request> createRequest(@Valid @RequestBody Request requestModel){
+    public ResponseEntity<Request> createRequest(@Valid @RequestBody Request requestModel) {
 
         // get the data passed by request/passed to postman
         Request request = new Request(
-                                   requestModel.getActionId(),
-                                   requestModel.getEnvironmentId(),
-                                   requestModel.getOrganizationalUnit(),
-                                   requestModel.getResourceId(),
-                                   requestModel.getStatus(),
-                                   requestModel.getView(),
-                                   requestModel.getSubjectId()
-                                  );
+                requestModel.getActionId(),
+                requestModel.getEnvironmentId(),
+                requestModel.getOrganizationalUnit(),
+                requestModel.getResourceId(),
+                requestModel.getStatus(),
+                requestModel.getView(),
+                requestModel.getSubjectId());
 
         System.out.println(request);
 
         return new ResponseEntity<Request>(requestService.saveRequest(request), HttpStatus.CREATED);
     }
+    */
 
     /**
      * update an request
+     * 
      * @param id
      * @param request
      * @return
      */
     @PutMapping("/request/{id}")
-    public ResponseEntity<Request> updateRequest(@PathVariable Long id, @RequestBody Request request){
-    //    request.setRequestId(id);
-       return new ResponseEntity<Request>(requestService.updateRequest(request), HttpStatus.OK);
+    public ResponseEntity<Request> updateRequest(@PathVariable Long id, @RequestBody Request request) {
+        // request.setRequestId(id);
+        return new ResponseEntity<Request>(requestService.updateRequest(request), HttpStatus.OK);
     }
 
     /**
      * delete an Request
+     * 
      * @param id
      * @return
      */
     @DeleteMapping("/request")
-    public ResponseEntity<HttpStatus> deleteRequest(@RequestParam Long id){
+    public ResponseEntity<HttpStatus> deleteRequest(@RequestParam Long id) {
 
-//        requestService.deleteRequest(id);
+        // requestService.deleteRequest(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 
     }
-
 
 }

@@ -47,7 +47,6 @@ public class Request {
 	private String environmentId;
 
 	@Column(name = "status", nullable = true, updatable = true)
-    @NotBlank(message = "The field status id can't be null")
 	private String status;
 
 	/*

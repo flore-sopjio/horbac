@@ -23,16 +23,25 @@ public class RequestServiceImple implements RequestService {
         // methods
     
         /**
-         * get the requests list
+         * get the requests list with pagination
          *
          * @return
          */
         @Override
-        public List<Request> getRequests(int pageNumber, int pageSize) {
+        public List<Request> getRequestsPagenate(int pageNumber, int pageSize) {
             Pageable pages = PageRequest.of(pageNumber, pageSize);
             return requestRepository.findAll(pages).getContent();
         }
-    
+
+        /**
+         * get the requests list without pagination
+         * @return
+         */
+        @Override
+        public List<Request> getRequests(){
+            return requestRepository.findAll();
+        }
+
         /**
          * Save request to database.
          *

@@ -6,4 +6,5 @@ export interface RequestDTO {
     actionId?: string;
     environmentId?: string;
     status?: string;
+    requestId?: number;
 }

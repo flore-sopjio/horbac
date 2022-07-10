@@ -2,7 +2,7 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Requête',
+    name: 'Nouvelle requête',
     url: '/request',
     iconComponent: { name: 'cil-send' }
   },

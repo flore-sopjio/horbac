@@ -2,28 +2,19 @@
   <thead cTableColor="dark">
     <tr>
       <th scope="col">IDs</th>
-      <th scope="col">Description de la requête</th>
-      <th scope="col">Status</th>
-      <th scope="col">Actions</th>
+      <th scope="col">DESCRIPTION DE LA REQUETE </th>
+      <th scope="col">STATUS</th>
+      <th scope="col">ACTIONS</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td><button class="btn btn-primary">traite</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colSpan="2">Larry the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let req of requestList">
+      <td scope="row"> {{ req?.requestId }}</td>
+      <td>L'employé <span class="attrib-style">{{ req?.subjectId }}</span> veut <span class="attrib-style">{{
+          req?.actionId }}</span> la ressource <span class="attrib-style">{{ req?.resourceId }}</span></td>
+      <td>{{ req?.status }}</td>
+      <td><button class="btn btn-primary">Accepter</button><button class="btn btn-danger espace">Refuser</button><button class="btn
+        btn-info espace">Liste traitements</button></td>
     </tr>
   </tbody>
 </table>
