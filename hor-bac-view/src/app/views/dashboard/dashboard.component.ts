@@ -47,6 +47,8 @@ export class DashboardComponent implements OnInit {
   public sendRequest() {
     const requestDTO: RequestDTO = this.form.value;
     this.requestService.createResquest(requestDTO).toPromise().then(res => {
+      console.log(res);
+      
       this.response = res;
       this.toggleLiveDemo();
       this.initializeForm();
